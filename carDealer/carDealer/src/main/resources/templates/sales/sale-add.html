@@ -1,0 +1,31 @@
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="text-left"><h2 class="display-3">Add Sale</h2></div>
+                <br/>
+                <form method="post">
+                    <div class="form-group row">
+                        <label for="customer">Customer</label>
+                        <select class="form-control" name="customer" id="customer">
+                            <option th:each="customer : ${customers}" th:value="${customer.name}" th:text="${customer.name}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <label for="car">Car</label>
+                        <select class="form-control" name="car" id="car">
+                            <option th:each="car : *{cars}" th:value="${car.make} + '-' + ${car.id} + '-' + ${car.model}" th:text="${car.make} + ' ' + ${car.model}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <label for="discount">Discount</label>
+                        <input class="form-control" type="number" step="0.01" min="0" max="0.5" id="discount" name="discount">
+                    </div>
+                    <div class="form-group row">
+                        <input class="btn btn-success" type="submit" name="add" value="Submit"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

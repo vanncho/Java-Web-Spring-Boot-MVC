@@ -1,0 +1,24 @@
+<div>
+    <div class="container">
+        <div th:if="${session.loggedUser != null}">
+            <a class="btn btn-success" th:href="@{/parts/add}"> + Add part</a>
+        </div>
+        <br/>
+        <table class="table tab-content">
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Supplier Name</th>
+            </tr>
+            <tr class="warning" th:each="part : ${parts}">
+                <td th:text="${part.name}"></td>
+                <td th:text="${part.price}"></td>
+                <td th:text="${part.quantity}"></td>
+                <td th:text="${part.supplierName}"></td>
+                <td><a th:href="@{'/parts/edit/' + ${part.id}}">Edit</a></td>
+                <td><a th:href="@{'/parts/delete/' + ${part.id}}">Delete</a></td>
+            </tr>
+        </table>
+    </div>
+</div>

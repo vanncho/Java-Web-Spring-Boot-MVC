@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<div>
+    <div class="container">
+        <div class="text-left"><h2 class="display-3">All Viruses</h2></div>
+        <br/>
+        <table class="table tab-content">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Magnitude</th>
+                <th>Released On</th>
+            </tr>
+            <tr th:each="virus : ${viruses}">
+                <td th:text="${virus.id}"></td>
+                <td th:text="${virus.name}"></td>
+                <td th:text="${virus.magnitude}"></td>
+                <td th:text="${#dates.format(virus.releasedOn, 'dd-MMM-yyyy')}"></td>
+                <td sec:authorize="hasRole('ADMIN')" ><a role="button" class="btn btn-default" th:href="@{'/virus/edit/' + ${virus.id}}">Edit</a></td>
+                <td sec:authorize="hasAnyRole('ADMIN', 'MEDIC')" ><a role="button" class="btn btn-default" th:href="@{'/virus/delete/' + ${virus.id}}">Delete</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+</html>

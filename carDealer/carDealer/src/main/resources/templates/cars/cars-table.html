@@ -1,0 +1,37 @@
+<div>
+    <div class="container">
+        <div th:if="${session.loggedUser != null}">
+            <a class="btn btn-success" th:href="@{/cars/add}"> + Add car</a>
+        </div>
+        <br/>
+        <form method="post">
+            <label for="carMake">Car Make</label>
+            <select class="form-control" name="carMake" id="carMake" onChange="window.location.href=this.value">
+                <option th:each="car : ${carByMake}" href="@{'/cars/' + ${car}}" th:value="${car}"><p
+                        th:text="${car}"></p></a></option>
+            </select>
+        </form>
+        <br/>
+        <table class="table tab-content">
+            <tr>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Travelled Distance</th>
+            </tr>
+            <tr class="warning" th:each="car : ${cars}">
+                <td th:text="${car.make}"></td>
+                <td th:text="${car.model}"></td>
+                <td th:text="${car.travelledDistance}"></td>
+                <td><a th:href="@{'/cars/' + ${car.id} + '/parts'}">Parts</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script>
+    document.getElementById("foo").onchange = function () {
+        if (this.selectedIndex !== 0) {
+            window.location.href = this.value;
+        }
+    };
+</script>

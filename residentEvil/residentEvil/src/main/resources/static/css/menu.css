@@ -1,0 +1,7 @@
+.navbar.navbar-toggleable-md.navbar-light li a.nav-link {
+    color: white;
+}
+
+.navbar.navbar-toggleable-md.navbar-light li a.dropdown-item {
+    color: black;
+}

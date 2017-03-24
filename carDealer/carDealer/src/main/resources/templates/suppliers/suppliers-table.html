@@ -1,0 +1,21 @@
+<div>
+    <div class="container">
+        <div>Order by:
+            <a th:href="@{/suppliers/local}">Local</a> |
+            <a th:href="@{/suppliers/importers}">Importers</a>
+        </div>
+        <br/>
+        <table class="table tab-content">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Number Of Parts</th>
+            </tr>
+            <tr class="warning" th:each="supplier : ${suppliers}">
+                <td><p th:text="${supplier.id}"></p></td>
+                <td><p th:text="${supplier.name}"></p></td>
+                <td th:text="${supplier.partsSize}"></td>
+            </tr>
+        </table>
+    </div>
+</div>

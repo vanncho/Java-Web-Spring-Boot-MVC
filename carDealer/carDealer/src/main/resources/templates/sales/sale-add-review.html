@@ -1,0 +1,38 @@
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="text-left"><h2 class="display-3">Review Sale</h2></div>
+                <br/>
+                <form method="post">
+                    <div class="form-group row">
+                        <label for="customer">Customer: </label>
+                        <input class="form-control" type="text" id="customer" name="customer" th:value="${saleReview.customer}"/>
+                    </div>
+                    <div class="form-group row">
+                        <label for="car">Car: </label>
+                        <input class="form-control" type="text" id="car" name="car" th:value="${saleReview.carMakeModel}">
+                    </div>
+                    <div class="form-group row">
+                        <label th:if="${saleReview.isYoungDriver == TRUE}" for="discount">Discount: (+5%)</label>
+                        <label th:if="${saleReview.isYoungDriver == FALSE}" for="discount">Discount: %</label>
+                        <input th:if="${saleReview.isYoungDriver == TRUE}" class="form-control" type="text" id="discount" name="discount" th:value="${#numbers.formatDecimal(saleReview.discount,0,0)}">
+                        <input th:if="${saleReview.isYoungDriver == FALSE}" class="form-control" type="text"  name="discount" th:value="${#numbers.formatDecimal(saleReview.discount,0,0)}">
+                    </div>
+                    <div class="form-group row">
+                        <label for="carPrice">Car Price: </label>
+                        <input class="form-control" type="text" id="carPrice" name="carPrice" th:value="${#numbers.formatDecimal(saleReview.carPrice,0,2)}">
+                    </div>
+                    <div class="form-group row">
+                        <label for="finalCarPrice">Final Car Price: </label>
+                        <input class="form-control" type="text" id="finalCarPrice" name="finalCarPrice" th:value="${#numbers.formatDecimal(saleReview.finalCarPrice,0,2)}">
+                    </div>
+                    <div class="form-group row">
+                        <a class="btn btn-default" th:href="@{/sales}">Cancel</a>
+                        <input class="btn btn-success" type="submit" name="add" value="Finalize"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

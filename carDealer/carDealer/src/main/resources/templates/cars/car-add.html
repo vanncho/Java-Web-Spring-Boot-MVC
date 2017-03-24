@@ -1,0 +1,33 @@
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="text-left"><h2 class="display-3">Add Car</h2></div>
+                <br/>
+                <form method="post">
+                    <div class="form-group row">
+                        <label for="make">Make</label>
+                        <input class="form-control" type="text" name="make" id="make" placeholder="Car make"/>
+                    </div>
+                    <div class="form-group row">
+                        <label for="model">Model</label>
+                        <input class="form-control" type="text" name="model" id="model" placeholder="Car model" />
+                    </div>
+                    <div class="form-group row">
+                        <label for="travelledDistance">Travelled Distance</label>
+                        <input class="form-control" type="number" name="travelledDistance" id="travelledDistance" placeholder="Enter travelled distance" />
+                    </div>
+                    <div class="form-group row">
+                        <label for="parts">Parts</label>
+                        <div th:each="part : ${parts}">
+                            <input style="display: inline" type="checkbox" name="parts" id="parts" th:value="${part.name}" /><p style="display: inline; padding-left: 5px" th:text="${part.name}"></p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <input class="btn btn-success" type="submit" name="add" value="Add"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

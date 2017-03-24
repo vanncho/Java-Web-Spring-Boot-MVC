@@ -1,0 +1,27 @@
+<div>
+    <div class="container">
+        <div th:if="${session.loggedUser != null}">
+            <a class="btn btn-success" th:href="@{/customers/add}"> + Add customer</a>
+        </div>
+        <br/>
+        <div>Order by:
+            <a th:href="@{/customers/all/ascending}">Ascending</a> |
+            <a th:href="@{/customers/all/descending}">Descending</a>
+        </div>
+        <br/>
+        <table class="table tab-content">
+            <tr>
+                <th>Name</th>
+                <th>Birth Date</th>
+                <th>Young Driver</th>
+            </tr>
+            <tr class="warning" th:each="customer : ${customers}">
+                <td><p th:text="${customer.name}"></p></td>
+                <td th:text="${#dates.format(customer.birthDate, 'yyyy-dd-MM')}"></td>
+                <td th:text="${customer.isYoungDriver}"></td>
+                <td><a th:href="@{'/customers/' + ${customer.id}}">Details</a></td>
+                <td><a th:href="@{'/customers/edit/' + ${customer.id}}">Edit</a></td>
+            </tr>
+        </table>
+    </div>
+</div>

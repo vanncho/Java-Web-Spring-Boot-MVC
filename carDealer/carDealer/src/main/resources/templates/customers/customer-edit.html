@@ -1,0 +1,22 @@
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <form method="post">
+                    <div class="form-group row">
+                        <label for="name">Name</label>
+                        <input class="form-control" type="text" name="name" id="name" th:value="${editCustomer.name}"/>
+                    </div>
+                    <div class="form-group row">
+                        <label for="birthDate">Birth Date</label>
+                        <input class="form-control" type="text" name="birthDate" id="birthDate" th:value="${editCustomer.birthDate}" />
+                    </div>
+                    <div class="form-group row">
+                        <a class="btn btn-success" href="/customers/all/ascending">Cancel</a>
+                        <input class="btn btn-danger" type="submit" name="add" value="Edit"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

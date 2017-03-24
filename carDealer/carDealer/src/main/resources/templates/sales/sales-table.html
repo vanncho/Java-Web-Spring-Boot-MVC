@@ -1,0 +1,35 @@
+<div>
+    <div class="container">
+        <div th:if="${session.loggedUser != null}">
+            <a class="btn btn-success" th:href="@{/sales/add}"> + Add sale</a>
+        </div>
+        <br/>
+        <div>
+            <a th:href="@{/sales}">All</a> |
+            <a th:href="@{/sales/discounted}">Discounted</a>
+        </div>
+        <br/>
+            <form class="form-horizontal" method="post">
+                <div class="input-group">
+                    <input class="form-control" type="number" step="5" min="0" name="percent" value="0" />
+                    <span class="input-group-btn">
+                        <input class="btn btn-success form-control" type="submit" name="percent" value="Discount"/>
+                    </span>
+                </div>
+            </form>
+        <br/>
+        <table class="table tab-content">
+            <tr>
+                <th>Discount %</th>
+                <th>Car Make</th>
+                <th>Customer Name</th>
+            </tr>
+            <tr class="warning" th:each="sale : ${sales}">
+                <td><p th:text="${#numbers.formatDecimal(sale.discount,0,0)}"></p></td>
+                <td th:text="${sale.carMake}"></td>
+                <td th:text="${sale.customerName}"></td>
+                <td><a th:href="@{'/sales/' + ${sale.id}}">Details</a></td>
+            </tr>
+        </table>
+    </div>
+</div>

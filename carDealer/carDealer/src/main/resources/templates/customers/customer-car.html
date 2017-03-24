@@ -1,0 +1,20 @@
+<div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <table class="table tab-content">
+                    <tr>
+                        <th>Name</th>
+                        <th>Bought Cars</th>
+                        <th>Spent Money</th>
+                    </tr>
+                    <tr class="warning">
+                        <td th:text="${customer.name}"></td>
+                        <td th:text="${customer.boughtCars}"></td>
+                        <td th:text="${#numbers.formatDecimal(customer.spentMoney,0,2)}"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

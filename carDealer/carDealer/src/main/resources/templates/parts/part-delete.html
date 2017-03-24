@@ -1,0 +1,31 @@
+<div th:insert="~{fragments/errors}"></div>
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <form method="post">
+                    <div class="form-group row">
+                        <label for="name">Name</label>
+                        <input class="form-control" type="text" name="name" id="name" th:value="${part.name}" disabled/>
+                    </div>
+                    <div class="form-group row">
+                        <label for="price">Price</label>
+                        <input class="form-control" type="text" name="price" id="price" th:value="${part.price}" disabled/>
+                    </div>
+                    <div class="form-group row">
+                        <label for="quantity">Quantity</label>
+                        <input class="form-control" type="text" name="quantity" id="quantity" th:value="${part.quantity}" disabled/>
+                    </div>
+                    <div class="form-group row">
+                        <label for="supplier">Supplier</label>
+                        <input class="form-control" type="text" name="supplier" id="supplier" th:value="${part.supplierName}" disabled />
+                    </div>
+                    <div class="form-group row">
+                        <a class="btn btn-success" type="submit" th:href="@{/parts}">Cancel</a>
+                        <input class="btn btn-danger" type="submit" name="add" value="Delete"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
