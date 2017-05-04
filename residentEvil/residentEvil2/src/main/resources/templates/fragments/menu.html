@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<div>
+    <nav class="navbar navbar-toggleable-md navbar-light bg-primary">
+        <div class="container">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="/">Resident Evil</a>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/home}">Home</a>
+                    </li>
+                    <li sec:authorize="hasRole('ADMIN')" class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="AdminDropdownMenuLink"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Viruses
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" th:href="@{/viruses}">Show</a>
+                            <a class="dropdown-item" th:href="@{/virus/add}">Add</a>
+                        </div>
+                    </li>
+                    <li sec:authorize="hasAnyRole('ADMIN', 'MEDIC')" class="nav-item">
+                        <a class="nav-link" th:href="@{/cures}">Cures</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/map}">Map</a>
+                    </li>
+                    <li sec:authorize="hasRole('ADMIN')" class="nav-item">
+                        <a class="nav-link" th:href="@{/users}">Users</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li sec:authorize="isAuthenticated()" class="nav-item">
+                            <a class="nav-link" th:href="@{/logout}">Logout (<span th:text="${#authentication.getPrincipal().getUsername()}"></span>)</a>
+                        </li>
+                        <li sec:authorize="isAnonymous()" class="nav-item">
+                            <a class="nav-link" th:href="@{/register}">Register</a>
+                        </li>
+                        <li sec:authorize="isAnonymous()" class="nav-item">
+                            <a class="nav-link" th:href="@{/login}">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+</html>

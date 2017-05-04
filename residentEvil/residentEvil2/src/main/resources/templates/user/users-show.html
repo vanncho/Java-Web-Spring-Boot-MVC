@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<div>
+    <div class="container">
+        <div class="text-left"><h2 class="display-3">All Users</h2></div>
+        <br/>
+        <table class="table tab-content">
+            <tr>
+                <th>#</th>
+                <th>Username</th>
+                <th>Is Enabled?</th>
+                <th>Change Role</th>
+            </tr>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.enabled}"></td>
+                <td>
+                    <form th:method="post">
+                        <span>
+                            <select id="role" name="role">
+                                <option th:if="${user.authority != #strings.substring(role.authority, 5)}" th:each="role : ${roles}" th:value="${#strings.substring(role.authority, 5)} + '=' + ${user.id}" th:text="${#strings.substring(role.authority, 5)}"></option>
+                                <option th:selected="${user.authority}" th:text="${user.authority}"></option>
+                            </select>
+                            <button th:if="${user.authority != 'ADMIN'}" type="submit" class="btn btn-primary">Change</button>
+                        </span>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+<br/>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-sm-8 col-xs-12">
+            <div class="jumbotron" id="modif-jumbotron">
+                <h2>Write a feedback</h2>
+                <form th:method="post" th:object="${feedbackAddModel}">
+                    <div class="form-group">
+                        <label class="form-control-label" for="message">Message:</label>
+                        <textarea style="height: 150px" class="form-control" id="message" th:field="*{message}"></textarea>
+                    </div>
+                    <div class="has-danger" id="fullNameHelp" th:each="error : ${#fields.errors('message')}" th:text="${error}"></div>
+                    <br/>
+                    <div class="form-group">
+                        <button th:type="submit" class="btn btn-primary" id="btn-send">Send</button>
+                        <a class="btn btn-default" th:href="@{/}">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

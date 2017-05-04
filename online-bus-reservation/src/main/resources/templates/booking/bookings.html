@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<div class="container">
+    <div class="row">
+        <div class="jumbotron" id="modif-jumbotron">
+            <br/>
+            <div>
+                <p th:text="|All Bookings for: ${#authentication.getPrincipal().getFullName()}|"></p>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Travel Time</th>
+                        <th>Travel Date</th>
+                        <th>Total Cost</th>
+                        <th>Seats Count</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr class="warning" th:each="booking : ${bookings}">
+                        <td th:text="${booking.bus.originatedFromName}"></td>
+                        <td th:text="${booking.bus.destinationToName}"></td>
+                        <td th:text="${booking.bus.timeFromOrigin}"></td>
+                        <td th:text="${booking.bus.dateOfJourney}"></td>
+                        <td th:text="|$ ${booking.totalCost}|"></td>
+                        <td th:text="${booking.seatsCount}"></td>
+                        <td>
+                            <a class="btn btn-default" th:href="@{'/booking/print/' + ${booking.id}}">Print Booking</a>
+                            <a class="btn btn-danger" th:href="@{'/booking/cancellation/' + ${booking.id}}">Cancellation</a>
+                        </td>
+                    </tr>
+                </table>
+                <small>*Booking cancellation can be made no latter than 24 hours before travelling.</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>

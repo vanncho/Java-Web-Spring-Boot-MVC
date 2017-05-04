@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../Java Spring MVC Frameworks/05.Spring Security/resident-evil/src/main/main.iml" filepath="$PROJECT_DIR$/../../Java Spring MVC Frameworks/05.Spring Security/resident-evil/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/residentEvil.iml" filepath="$PROJECT_DIR$/.idea/residentEvil.iml" />
+      <module fileurl="file://$PROJECT_DIR$/residentEvil2/residentEvil2.iml" filepath="$PROJECT_DIR$/residentEvil2/residentEvil2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../Java Spring MVC Frameworks/05.Spring Security/resident-evil/src/test/test.iml" filepath="$PROJECT_DIR$/../../Java Spring MVC Frameworks/05.Spring Security/resident-evil/src/test/test.iml" />
+    </modules>
+  </component>
+</project>

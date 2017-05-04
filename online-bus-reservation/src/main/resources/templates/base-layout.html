@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head"></head>
+
+<body>
+<div th:replace="fragments/menu"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-sm-8 col-xs-12">
+
+            <div th:replace="${view}"></div>
+
+            <div th:replace="fragments/scripts-bundle"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

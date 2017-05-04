@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<div class="jumbotron" id="modif-jumbotron" th:fragment="date-selection">
+    <div class="form-group row">
+        <h2 class="seat-select-text">Book Ticket Now</h2>
+    </div>
+    <form class="booking-form" method="post" th:object="${bus}">
+        <div class="form-group row">
+            <label class="form-control-label">Bus Name: </label>
+            <input type="text" th:field="*{busName}" class="modified-input" disabled="disabled"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">From: </label>
+            <input type="text" th:field="*{originatedFromName}" class="modified-input" disabled="disabled"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">To: </label>
+            <input type="text" th:field="*{destinationToName}" class="modified-input" disabled="disabled"/>
+        </div>
+        <div class="form-group row time">
+            <label class="form-control-label">Journey Time: </label>
+            <input type="text" th:field="*{timeFromOrigin}" class="modified-input" disabled="disabled"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">Ticket Price: $</label>
+            <input type="number" class="modified-input" id='ticketPrice' th:field="*{ticketPrice}" disabled="disabled"/>
+        </div>
+    </form>
+
+    <form method="post" th:object="${bookingDateSelectionModel}">
+
+        <div class="form-group row required booking-form">
+            <label class="form-control-label">Date Of Journey: </label>
+            <input type="date" class="booking-date" placeholder="yyyy-MM-dd" th:field="*{dateOfJourney}" required="required"/>
+            <div class="has-danger" id="seatHelp" th:each="error : ${#fields.errors('dateOfJourney')}" th:text="${error}"></div>
+        </div>
+
+        <div class="form-group row booking-form">
+            <input class="btn btn-success" type="submit" name="reviewBooking" value="Select Seats"/>
+            <a class="btn btn-default" th:href="@{/}">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<div class="jumbotron" id="modif-jumbotron" th:fragment="book">
+    <form class="booking-form" method="post" th:object="${bus}">
+        <div class="form-group row">
+            <label class="form-control-label">Bus Name: </label>
+            <input type="text" th:field="*{busName}" class="modified-input" disabled="disabled"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">From: </label>
+            <input type="text" th:field="*{originatedFromName}" class="modified-input" disabled="disabled"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">To: </label>
+            <input type="text" th:field="*{destinationToName}" class="modified-input" disabled="disabled"/>
+        </div>
+        <div class="form-group row time">
+            <label class="form-control-label">Journey Time: </label>
+            <input type="text" th:field="*{timeFromOrigin}" class="modified-input" disabled="disabled"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">Single Ticket Price: $</label>
+            <input type="number" class="modified-input" id='ticketPrice' th:field="*{ticketPrice}" disabled="disabled"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">Date Of Journey: </label>
+            <input type="text" class="modified-input" th:value="${dateOfJourney}" disabled="disabled"/>
+        </div>
+    </form>
+
+    <form method="post" th:object="${bookingRegistrationModel}">
+        <div class="form-group row required">
+            <h2 class="seat-select-text">Select your seat(s)</h2>
+        </div>
+        <div class="seat-select-text has-danger" id="seatHelp" th:each="error : ${#fields.errors('selectedSeat')}"
+             th:text="${error}">
+        </div>
+        <div class="left-left-seats">
+            <span th:each="i : ${#numbers.sequence(1, 52, 4)}">
+                <span id="selectedSeat" class="seats-up"
+                      th:classappend="${#lists.contains(bus.seats, + i)} ? 'reserved'">
+                    <img src="../../images/bus-seat.png" height="40" width="40"/>
+                    <small th:if="${#strings.length(i) == 1}" th:text="|${0}${i}|"></small>
+                    <small th:if="${#strings.length(i) == 2}" th:text="${i}"></small>
+                    <input id="check" onclick="calc(this);" type="checkbox" th:field="*{selectedSeat}" th:value="${i}"
+                           th:checked="${#lists.contains(bus.seats, + i)} ? 'checked'"
+                           th:disabled="${#lists.contains(bus.seats, + i)} ? 'disabled'"/>
+                </span>
+                <br th:if="${i} % 1 == 0"/>
+            </span>
+        </div>
+        <div class="left-right-seats">
+            <span th:each="i : ${#numbers.sequence(2, 52, 4)}">
+                <span id="selectedSeat" class="seats-up"
+                      th:classappend="${#lists.contains(bus.seats, + i)} ? 'reserved'">
+                    <img src="../../images/bus-seat.png" height="40" width="40"/>
+                    <small th:if="${#strings.length(i) == 1}" th:text="|${0}${i}|"></small>
+                    <small th:if="${#strings.length(i) == 2}" th:text="${i}"></small>
+                    <input id="check" onclick="calc(this);" type="checkbox" th:field="*{selectedSeat}" th:value="${i}"
+                           th:checked="${#lists.contains(bus.seats, + i)} ? 'checked'"
+                           th:disabled="${#lists.contains(bus.seats, + i)} ? 'disabled'"/>
+                </span>
+                <br th:if="${i} % 1 == 0"/>
+            </span>
+        </div>
+        <div class="right-left-seats">
+            <span th:each="i : ${#numbers.sequence(3, 52, 4)}">
+                <span id="selectedSeat" class="seats-up"
+                      th:classappend="${#lists.contains(bus.seats, + i)} ? 'reserved'">
+                    <img src="../../images/bus-seat.png" height="40" width="40"/>
+                    <small th:if="${#strings.length(i) == 1}" th:text="|${0}${i}|"></small>
+                    <small th:if="${#strings.length(i) == 2}" th:text="${i}"></small>
+                    <input id="check" onclick="calc(this);" type="checkbox" th:field="*{selectedSeat}" th:value="${i}"
+                           th:checked="${#lists.contains(bus.seats, + i)} ? 'checked'"
+                           th:disabled="${#lists.contains(bus.seats, + i)} ? 'disabled'"/>
+                </span>
+                <br th:if="${i} % 1 == 0"/>
+            </span>
+        </div>
+        <div class="right-right-seats">
+            <span th:each="i : ${#numbers.sequence(4, 52, 4)}">
+                <span id="selectedSeat" class="seats-up"
+                      th:classappend="${#lists.contains(bus.seats, + i)} ? 'reserved'">
+                    <img src="../../images/bus-seat.png" height="40" width="40"/>
+                    <small th:if="${#strings.length(i) == 1}" th:text="|${0}${i}|"></small>
+                    <small th:if="${#strings.length(i) == 2}" th:text="${i}"></small>
+                    <input id="check" onclick="calc(this);" type="checkbox" th:field="*{selectedSeat}" th:value="${i}"
+                           th:checked="${#lists.contains(bus.seats, + i)} ? 'checked'"
+                           th:disabled="${#lists.contains(bus.seats, + i)} ? 'disabled'"/>
+                </span>
+                <br th:if="${i} % 1 == 0"/>
+            </span>
+        </div>
+        <div class="form-group row booking-form">
+            <label class="form-control-label">Total Cost: $</label>
+            <input type="number" id="totalCost" class="modified-input" th:field="*{totalCost}" th:value="${totalCost}" readonly="readonly"/>
+        </div>
+        <div class="form-group row booking-form">
+            <input class="btn btn-success" type="submit" name="reviewBooking" value="Review Booking"/>
+            <a class="btn btn-default" th:href="@{/}">Cancel</a>
+        </div>
+    </form>
+
+</div>
+
+<div class="print-form" th:fragment="print">
+    <form method="post" th:object="${booking}">
+        <div class="form-group row">
+            <label class="form-control-label">Name: </label>
+            <input class="modified-input" type="text" th:value="*{userFullName}" readonly="readonly"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">Bus Name: </label>
+            <input class="modified-input" type="text" th:value="*{busBusName}" readonly="readonly"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">From: </label>
+            <input class="modified-input" type="text" th:value="*{originatedFrom}" readonly="readonly"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">To: </label>
+            <input class="modified-input" type="text" th:value="*{destinationTo}" readonly="readonly"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">Time: </label>
+            <input class="modified-input" type="text" th:value="*{timeFromOrigin}" readonly="readonly"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">Booking Date: </label>
+            <input class="modified-input" type="text" th:value="*{dateOfJourney}" readonly="readonly"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">Total Cost: $</label>
+            <input type="number" class="modified-input" th:value="*{totalCost}" readonly="readonly"/>
+        </div>
+        <div>
+            <label id="reserved-seat-label" class="form-control-label">Seat(s):</label>
+            <span th:each="seat : ${booking.selectedSeat}">
+                        <span class="seats-up" th:text="${seat}" th:value="${seat}"></span>
+                    </span>
+        </div>
+        <br/>
+        <div class="form-group row">
+            <a class="btn btn-primary" onclick='window.print();'>Print Booking</a>
+            <a class="btn btn-success" th:href="@{/booking/bookings}">Back</a>
+        </div>
+    </form>
+</div>
+
+<div class="print-form" th:fragment="cancellation">
+    <form method="post" th:object="${bookingCancellationViewModel}">
+        <div class="form-group row">
+            <label class="form-control-label">Name: </label>
+            <input class="modified-input" type="text" th:field="*{user.fullName}" readonly="readonly"/>
+            <input class="modified-input" type="text" th:field="*{user.id}" hidden="hidden"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">Bus Name: </label>
+            <input class="modified-input" type="text" th:field="*{bus.busName}" readonly="readonly"/>
+            <input class="modified-input" type="text" th:field="*{bus.id}" hidden="hidden"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">From: </label>
+            <input class="modified-input" type="text" th:field="*{bus.originatedFromName}" readonly="readonly"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">To: </label>
+            <input class="modified-input" type="text" th:field="*{bus.destinationToName}" readonly="readonly"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">Journey Date: </label>
+            <input class="modified-input" type="text" th:field="*{dateOfJourney}" readonly="readonly"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">Booking Date: </label>
+            <input style="width: 76px" type="text" class="modified-input" th:field="*{bookingDate}" readonly="readonly"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">Total Cost: $</label>
+            <input type="number" class="modified-input" th:field="*{ticketPrice}" readonly="readonly"/>
+        </div>
+        <div th:object="${bookingCancellationViewModel}">
+            <label id="reserved-seat-label" class="form-control-label">Seat(s):</label>
+            <span th:each="seat : ${bookingCancellationViewModel.selectedSeat}">
+                        <span class="seats-up" th:field="*{seat}" th:text="${seat}"></span>
+                    </span>
+        </div>
+        <br/>
+        <div class="form-group row">
+            <input class="btn btn-danger" type="submit" name="cancellation" value="Make Cancellation"/>
+            <a class="btn btn-default" th:href="@{/booking/bookings}">Cancel</a>
+        </div>
+        <div class="has-danger" id="cancellationHelp" th:each="error : ${#fields.errors('global')}"
+             th:text="${error}">
+        </div>
+    </form>
+</div>
+
+<div class="print-form" th:fragment="review">
+    <form method="post">
+        <div class="form-group row">
+            <input class="modified-input" type="text" th:value="${#authentication.getPrincipal().getId()}" th:name="userId" hidden="hidden"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">Name: </label>
+            <input class="modified-input" type="text" th:value="${#authentication.getPrincipal().getFullName()}" th:name="user" readonly="readonly"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">Bus Name: </label>
+            <input class="modified-input" type="text" th:value="${bus.busName}" th:name="busName" readonly="readonly"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">From: </label>
+            <input class="modified-input" type="text" th:value="${bus.originatedFromName}" th:name="origin" readonly="readonly"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">To: </label>
+            <input class="modified-input" type="text" th:value="${bus.destinationToName}" th:name="destination" readonly="readonly"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">Booking Date: </label>
+            <input class="modified-input" type="text" th:value="${booking.dateOfJourney}" th:name="dateOfJourney" readonly="readonly"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label">Total Cost: $</label>
+            <input type="number" class="modified-input" th:value="${booking.totalCost}" readonly="readonly"/>
+        </div>
+        <div th:object="${booking}">
+            <label id="reserved-seat-label" class="form-control-label">Seat(s):</label>
+            <span th:each="seat : ${booking.selectedSeat}">
+                        <span class="seats-up" th:text="${seat}" th:value="${seat}"></span>
+                    </span>
+        </div>
+        <br/>
+        <div class="form-group row">
+            <input class="btn btn-success" type="submit" name="book" value="Book"/>
+            <a class="btn btn-default" th:href="@{/}">Cancel</a>
+        </div>
+    </form>
+</div>
+
+</html>

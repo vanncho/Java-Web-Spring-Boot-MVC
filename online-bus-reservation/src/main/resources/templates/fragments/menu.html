@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<div>
+    <nav sec:authorize="!hasRole('ADMIN')" class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" th:href="@{/}">Online Bus Tickets</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/routes}">Routes</a></li>
+                <li><a sec:authorize="isAuthenticated()" th:href="@{/booking/bookings}">My Bookings</a></li>
+                <li><a sec:authorize="isAuthenticated()" th:href="@{/feedback/add}">Report a Problem</a></li>
+                <li><a th:href="@{/contacts}">Contact Us</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li sec:authorize="isAnonymous()" >
+                    <a th:href="@{/user/register}"><span class="nav-item glyphicon glyphicon-user"></span> Register</a>
+                </li>
+                <li sec:authorize="isAnonymous()">
+                    <a th:href="@{/user/login}"><span class="nav-item glyphicon glyphicon-log-in"></span> Login</a>
+                </li>
+                <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+                    <a th:href="@{/messages/messages}" class="dropbtn"><span class="nav-item glyphicon glyphicon-envelope"></span> Messages (<span th:text="${#authentication.getPrincipal().getUnreadMessages()}" class="message-size"></span>)</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a th:href="@{/logout}"><span class="nav-item glyphicon glyphicon-log-out"></span> Logout (<span th:text="${#authentication.getPrincipal().getUsername()}"></span>)</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <nav sec:authorize="hasRole('ADMIN')" class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" th:href="@{/}">Admin Panel</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/users}">User Management</a></li>
+                <li><a th:href="@{/buses}">Bus Management</a></li>
+                <li><a th:href="@{/feedback/feedbacks}">Feedback Management</a></li>
+                <li><a th:href="@{/info/info}">Company Info Management</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li sec:authorize="isAuthenticated()">
+                    <a th:href="@{/logout}"><span class="nav-item glyphicon glyphicon-log-out"></span> Logout (<span th:text="${#authentication.getPrincipal().getUsername()}"></span>)</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+</html>

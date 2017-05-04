@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<div class="container">
+    <div class="row">
+        <div>
+            <h2 class="main-text-h2">Find your bus</h2>
+            <h3 class="main-text-h3">- BOOK YOUR TICKET AND ENJOY YOUR RIDE -</h3>
+        </div>
+        <div class="col-lg-10 col-sm-6 col-xs-12 col-md-offset-1">
+            <form method="get" class="form-horizontal select">
+                <div class="form-group row city-origin">
+                    <select class="form-control city" th:name="origin">
+                        <option value=""> Departure station</option>
+                        <option value=""> ------------------- </option>
+                        <option th:each="city : ${cities}" th:value="${city.name}" th:text="${city.name}"></option>
+                    </select>
+                </div>
+                <div class="form-group row city">
+                    <select class="form-control city" th:name="destination">
+                        <option value=""> Destination station</option>
+                        <option value=""> ------------------- </option>
+                        <option th:each="city : ${cities}" th:value="${city.name}" th:text="${city.name}"></option>
+                    </select>
+                </div>
+                <div class="form-group row date">
+                    <input type="date" class="form-control date" placeholder="yyyy-MM-dd" id="datepicker" name="dateOfJourney"/>
+                </div>
+                <div class="form-group row home-find-city">
+                    <input class="btn btn-primary" type="submit" id="btn-show" onclick="checkDate()" value="Show me buses"/>
+                </div>
+            </form>
+            <div th:if="${not #strings.isEmpty(nobus)}">
+                <p class="main-text-no" th:text="${nobus}"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-sm-8 col-xs-12 col-md-offset-1">
+                <div style="background-color: white" class="jumbotron" id="search-res" th:if="${not #lists.isEmpty(searchedBuses)}">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tr style="background-color: white">
+                                <th>Departure</th>
+                                <th>Company</th>
+                                <th>Price</th>
+                                <th>Free Seats</th>
+                                <th>Book now</th>
+                            </tr>
+                            <tr class="warning" th:each="bus : ${searchedBuses}">
+                                <td th:text="${bus.timeFromOrigin}"></td>
+                                <td th:text="${bus.busName}"></td>
+                                <td th:text="|$ ${bus.ticketPrice}|"></td>
+                                <td class="seats-left-img" th:text="${bus.freeSeats}"></td>
+                                <td><a th:href="@{'/booking/reservation/' + ${bus.id}}">Buy Ticket</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>

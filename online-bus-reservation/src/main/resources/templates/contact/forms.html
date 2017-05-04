@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="contactUs">
+    <form id="contact" action="" method="get"> <!-- FORM METHOD IS GET -->
+        <h3>Contact Form</h3>
+        <h4>Contact us form</h4>
+        <fieldset>
+            <input placeholder="Your name" type="text" tabindex="1" required="required" autofocus="autofocus"/>
+        </fieldset>
+        <fieldset>
+            <input placeholder="Your Email Address" type="email" tabindex="2" required="required"/>
+        </fieldset>
+        <fieldset>
+            <input placeholder="Your Phone Number (optional)" type="tel" tabindex="3" required="required"/>
+        </fieldset>
+        <fieldset>
+            <textarea placeholder="Type your message here...." tabindex="5" required="required"></textarea>
+        </fieldset>
+        <fieldset>
+            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+        </fieldset>
+    </form>
+</div>
+
+</html>

@@ -1,0 +1,214 @@
+body {
+    background-image: url('../images/buses.jpg');
+    background-position: center top;
+    background-size: 100% auto;
+}
+
+#modif-jumbotron {
+    border-radius: 0;
+    background-color: white;
+}
+
+.form-group.row.required .form-control-label:before {
+    content: "*";
+    color: red;
+}
+
+.form-group.row.required .seat-select-text:before {
+    content: "*";
+    color: red;
+}
+
+.has-danger {
+    color: red;
+}
+
+#seatHelp {
+    content: "";
+    color: red;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.form-group.row.required.time {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+ .form-group.row.required.time .form-control.time {
+     width: 70px;
+ }
+
+.main-text-h2 {
+    font-size: 64px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+.main-text-h3 {
+    font-size: 15px;
+    color: white;
+    text-align: center;
+}
+
+.main-text-no {
+    font-size: 58px;
+    color: white;
+}
+
+.form-group.row.city-origin {
+    display: inline-block;
+    margin-right: 13px;
+}
+
+.form-group.row.city {
+    display: inline-block;
+}
+
+.form-group.row.date {
+    display: inline-block;
+}
+
+.form-group.row.home-find-city {
+    display: inline-block;
+}
+
+.form-group.row.city-origin .form-control.city {
+    border: none;
+    border-radius: 0;
+    width: 215px;
+    height: 45px;
+    font-size: 17px;
+}
+
+.form-group.row.city .form-control.city {
+    border: none;
+    border-radius: 0;
+    width: 215px;
+    height: 45px;
+    margin-right: 27px;
+    font-size: 17px;
+}
+
+.form-group.row.date .form-control.date {
+    border: none;
+    border-radius: 0;
+    width: 215px;
+    height: 45px;
+    margin-right: 27px;
+    font-size: 17px;
+    display: inline-block;
+}
+
+#search-res {
+    margin-left: 25px;
+    border-radius: 0;
+}
+
+#btn-show {
+    height: 46px;
+    border-radius: 0;
+}
+
+.form-horizontal.select {
+    margin-left: 15px;
+}
+
+.booking-form {
+    padding-left: 63px;
+}
+
+.form-group .row .required .booking-form {
+    padding-left: 63px;
+}
+
+.form-group .row .booking-form{
+    padding-left: 63px;
+}
+
+.user-sort {
+    padding-left: 20px;
+}
+
+.company-info-print {
+    font-weight: bold;
+    color: red;
+}
+
+.print-form {
+    margin-left: 15px;
+}
+
+.seats-left-img {
+    background-image: url('../images/bus-seat.png');
+    background-repeat: no-repeat;
+    background-size: 28px 28px;
+    background-position: 15px;
+    text-align: center;
+}
+
+/* BUS SEATS POSITIONING */
+
+.seat-select-text {
+    margin-left: 60px;
+}
+
+.left-left-seats {
+    display: inline-block;
+    margin-left: 50px;
+    margin-bottom: 30px;
+}
+
+.left-right-seats {
+    display: inline-block;
+    margin-bottom: 30px;
+}
+
+.right-left-seats {
+    display: inline-block;
+    margin-left: 50px;
+}
+
+.right-right-seats {
+    display: inline-block;
+}
+
+input[type=checkbox] {
+    transform: scale(1.4);
+}
+
+.seats-up {
+    display: inline-block;
+    border: 1px solid black;
+    padding: 3px 6px;
+    margin-bottom: 5px;
+}
+
+.seats-up:hover {
+    background-color: lightgreen;
+}
+
+.seats-up.reserved {
+    background-color: red;
+}
+
+#reserved-seat-label {
+    margin-left: -15px;
+}
+
+/* MODIFIED INPUTS */
+
+.modified-input {
+    border: none;
+    background-color: white;
+}
+
+.booking-date {
+    width: 150px;
+}
+
+/* REMOVE INPUT NUMBER ARROWS IN FIREFOX */
+input[type=number] {
+    -moz-appearance:textfield;
+}

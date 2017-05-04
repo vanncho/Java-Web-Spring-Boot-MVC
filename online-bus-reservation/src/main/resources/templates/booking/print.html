@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-sm-8 col-xs-12">
+            <div class="jumbotron" id="modif-jumbotron">
+                <div th:object="${companyInfo}">
+                    <div>
+                        <span class="company-info-print">Company Name: </span><span th:text="*{companyName}"></span>
+                    </div>
+                    <div>
+                        <span class="company-info-print">Address: </span><span th:text="*{address}"></span>
+                    </div>
+                    <div>
+                        <span class="company-info-print">Town: </span><span th:text="*{town}"></span>
+                    </div>
+                    <div>
+                        <span class="company-info-print">Phone Number: </span><span th:text="*{phoneNumber}"></span>
+                    </div>
+                </div>
+                <p>-----------------------------------</p>
+                <div th:replace="/booking/forms :: print"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

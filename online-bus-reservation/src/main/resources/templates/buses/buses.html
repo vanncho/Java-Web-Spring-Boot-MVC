@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<div class="container">
+    <div class="row">
+        <div class="jumbotron" id="modif-jumbotron">
+            <div>
+                <a class="btn btn-info" th:href="@{/buses/add}"> + Add Bus</a>
+            </div>
+            <br/>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Bus Name</th>
+                        <th>Originated From</th>
+                        <th>Destination To</th>
+                        <th>Time From Origin</th>
+                        <th>Seats</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr class="warning" th:each="bus : ${buses}">
+                        <td th:text="${bus.busName}"></td>
+                        <td th:text="${bus.originatedFromName}"></td>
+                        <td th:text="${bus.destinationToName}"></td>
+                        <td th:text="${bus.timeFromOrigin}"></td>
+                        <td th:text="${bus.numberOfSeats}"></td>
+                        <td>
+                            <a class="btn btn-default" th:href="@{'/buses/edit/' + ${bus.id}}">Edit</a>
+                            <a class="btn btn-danger" th:href="@{'/buses/delete/' + ${bus.id}}">Delete</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>

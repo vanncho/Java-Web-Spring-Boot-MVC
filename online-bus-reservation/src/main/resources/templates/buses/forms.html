@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<div class="jumbotron" id="modif-jumbotron" th:fragment="addBus">
+    <div class="form-group row">
+        <h2 class="display-3">Add New Bus</h2>
+    </div>
+    <br/>
+    <form method="post" th:object="${addBusModel}">
+
+        <div class="form-group row required">
+            <label class="form-control-label" for="busName">Bus Name</label>
+            <input type="text" id="busName" th:field="*{busName}" class="form-control" placeholder="Bus Name"/>
+            <div class="has-danger" id="busNameHelp" th:each="error : ${#fields.errors('busName')}" th:text="${error}"></div>
+        </div>
+        <div class="form-group required row">
+            <label class="form-control-label" for="originatedFrom">Route</label>
+            <div class="has-danger" id="originatedFromHelp" th:each="error : ${#fields.errors('originatedFromName')}" th:text="${error}"></div>
+            <div class="has-danger" id="destinationToHelp" th:each="error : ${#fields.errors('destinationToName')}" th:text="${error}"></div>
+            <div class="has-danger" id="matchingCitiesHelp" th:each="error : ${#fields.errors('global')}" th:text="${error}"></div>
+        </div>
+        <div class="form-group row city-origin">
+            <label class="form-control-label" for="originatedFrom">Originated From</label>
+            <select class="form-control city" id="originatedFrom" th:field="*{originatedFromName}">
+                <option value=""></option>
+                <option th:each="city : ${cities}" th:value="${city.name}" th:text="${city.name}"></option>
+            </select>
+        </div>
+        <div class="form-group row city">
+            <label class="form-control-label" for="destinationTo">Destination To</label>
+            <select class="form-control city" id="destinationTo" th:field="*{destinationToName}">
+                <option value=""></option>
+                <option th:each="city : ${cities}" th:value="${city.name}" th:text="${city.name}"></option>
+            </select>
+        </div>
+        <div class="form-group required row">
+            <label class="form-control-label" for="hour">Time From Origin</label>
+            <div class="has-danger" id="hourHelp" th:each="error : ${#fields.errors('hour')}" th:text="${error}"></div>
+            <div class="has-danger" id="minutesHelp" th:each="error : ${#fields.errors('minutes')}" th:text="${error}"></div>
+        </div>
+        <label for="hour">HH:H</label>
+        <div class="form-group row required time">
+            <input type="number" step="1" min="0" max="23" id="hour" th:field="*{hour}" class="form-control time" />
+        </div>
+        <label for="minutes">mm:m</label>
+        <div class="form-group row required time">
+            <input type="number" step="15" min="0" max="45" id="minutes" th:field="*{minutes}" class="form-control time" />
+        </div>
+        <div class="form-group row required">
+            <label class="form-control-label" for="numberOfSeats">Number Of Seats</label>
+            <input type="number" step="1" min="52" max="52" id="numberOfSeats" th:field="*{numberOfSeats}" class="form-control" placeholder="52" />
+            <div class="has-danger" id="nuberOfSeatsHelp" th:each="error : ${#fields.errors('numberOfSeats')}" th:text="${error}"></div>
+        </div>
+        <div class="form-group row required">
+            <label class="form-control-label" for="ticketPrice">Ticket Price</label>
+            <input type="number" step="0.01" min="0" id="ticketPrice" th:field="*{ticketPrice}" class="form-control" />
+            <div class="has-danger" id="ticketPriceHelp" th:each="error : ${#fields.errors('ticketPrice')}" th:text="${error}"></div>
+        </div>
+        <div class="form-group row">
+            <input class="btn btn-danger" type="submit" name="register" value="Add"/>
+            <a class="btn btn-default" th:href="@{/buses}">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<div class="jumbotron" id="modif-jumbotron" th:fragment="editBus">
+    <div class="form-group row">
+        <h2 class="display-3">Edit Bus</h2>
+    </div>
+    <br/>
+    <form method="post" th:object="${addBusModel}">
+
+        <div class="form-group row required">
+            <label class="form-control-label" for="busName">Bus Name</label>
+            <input type="text" id="busName" th:field="*{busName}" class="form-control" placeholder="Bus Name"/>
+            <div class="has-danger" id="busNameHelp" th:each="error : ${#fields.errors('busName')}" th:text="${error}"></div>
+        </div>
+        <div class="form-group required row">
+            <label class="form-control-label" for="originatedFromName">Route</label>
+            <div class="has-danger" id="originatedFromHelp" th:each="error : ${#fields.errors('originatedFromName')}" th:text="${error}"></div>
+            <div class="has-danger" id="destinationToHelp" th:each="error : ${#fields.errors('destinationToName')}" th:text="${error}"></div>
+            <div class="has-danger" id="matchingCitiesHelp" th:each="error : ${#fields.errors('global')}" th:text="${error}"></div>
+        </div>
+        <div class="form-group row city-origin">
+            <label class="form-control-label" for="originatedFromName">Originated From</label>
+            <select class="form-control city" id="originatedFromName" th:field="*{originatedFromName}">
+                <option th:value="*{originatedFromName}" th:text="*{originatedFromName}"></option>
+                <option th:each="city : ${cities}" th:value="${city.name}" th:text="${city.name}"></option>
+            </select>
+        </div>
+        <div class="form-group row city">
+            <label class="form-control-label" for="destinationToName">Destination To</label>
+            <select class="form-control city" id="destinationToName" th:field="*{destinationToName}">
+                <option th:value="*{destinationToName}" th:text="*{destinationToName}"></option>
+                <option th:each="city : ${cities}" th:value="${city.name}" th:text="${city.name}"></option>
+            </select>
+        </div>
+        <div class="form-group required row">
+            <label class="form-control-label" for="hour">Time From Origin</label>
+            <div class="has-danger" id="hourHelp" th:each="error : ${#fields.errors('hour')}" th:text="${error}"></div>
+            <div class="has-danger" id="minutesHelp" th:each="error : ${#fields.errors('minutes')}" th:text="${error}"></div>
+        </div>
+        <label for="hour">HH:H</label>
+        <div class="form-group row required time">
+            <input type="number" step="1" min="0" max="23" id="hour" th:field="*{hour}" th:value="*{hour}" class="form-control time" />
+        </div>
+        <label for="minutes">mm:m</label>
+        <div class="form-group row required time">
+            <input type="number" step="15" min="0" max="45" id="minutes" th:field="*{minutes}" th:value="*{minutes}"  class="form-control time" />
+        </div>
+        <div class="form-group row required">
+            <label class="form-control-label" for="numberOfSeats">Number Of Seats</label>
+            <input type="number" step="1" min="52" max="52" id="numberOfSeats" th:field="*{numberOfSeats}" class="form-control" />
+            <div class="has-danger" id="nuberOfSeatsHelp" th:each="error : ${#fields.errors('numberOfSeats')}" th:text="${error}"></div>
+        </div>
+        <div class="form-group row required">
+            <label class="form-control-label" for="ticketPrice">Ticket Price</label>
+            <input type="number" step="0.01" min="0" id="ticketPrice" th:field="*{ticketPrice}" class="form-control" />
+            <div class="has-danger" id="ticketPriceHelp" th:each="error : ${#fields.errors('ticketPrice')}" th:text="${error}"></div>
+        </div>
+        <div class="form-group row">
+            <input class="btn btn-danger" type="submit" name="register" value="Edit"/>
+            <a class="btn btn-default" th:href="@{/buses}">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<div class="jumbotron" id="modif-jumbotron" th:fragment="deleteBus">
+    <div class="form-group row">
+        <h2 class="display-3">Delete Bus</h2>
+    </div>
+    <br/>
+    <form method="post" th:object="${deleteBusModel}">
+
+        <div class="form-group row">
+            <label class="form-control-label" for="busName">Bus Name</label>
+            <input type="text" id="busName" th:field="*{busName}" class="form-control" disabled="disabled"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label" for="originatedFromName">Route</label>
+        </div>
+        <div class="form-group row city-origin">
+            <label class="form-control-label" for="originatedFromName">Originated From</label>
+            <input type="text" id="busName" th:field="*{originatedFromName}" class="form-control" disabled="disabled"/>
+        </div>
+        <div class="form-group row city">
+            <label class="form-control-label" for="destinationToName">Destination To</label>
+            <input type="text" id="busName" th:field="*{destinationToName}" class="form-control" disabled="disabled"/>
+        </div>
+        <div class="form-group row">
+            <label class="form-control-label" for="hour">Time From Origin</label>
+            <input type="text" id="busName" th:field="*{timeFromOrigin}" class="form-control" disabled="disabled"/>
+        </div>
+        <div class="form-group row required">
+            <label class="form-control-label" for="numberOfSeats">Number Of Seats</label>
+            <input type="text" id="busName" th:field="*{numberOfSeats}" class="form-control" disabled="disabled"/>
+        </div>
+        <div class="form-group row required">
+            <label class="form-control-label" for="ticketPrice">Ticket Price</label>
+            <input type="number" th:field="*{ticketPrice}" class="form-control" disabled="disabled" />
+        </div>
+        <div class="form-group row">
+            <input class="btn btn-danger" type="submit" name="delete" value="Delete"/>
+            <a class="btn btn-default" th:href="@{/buses}">Cancel</a>
+        </div>
+    </form>
+</div>
+
+</html>
