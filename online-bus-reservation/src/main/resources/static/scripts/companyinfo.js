@@ -174,31 +174,13 @@ function changeCompanyInfo(id) {
         error: function (jqXHR) {
 
             let errors = jQuery.parseJSON(jqXHR.responseText);
-            let arr = [];
+            let arr = errors.errors;
             let c = 0;
 
-            $.each(errors, function (i, error) {
+            for(i = 0; i < arr.length; i++) {
 
-                // alert(error.indexOf(",") >= 0);
-                // if (error.indexOf(',') >= 0) {
-
-                    // arr = String(error).split(',');
-                    // arr.push(e);
-                    // alert(e);
-                // }
-
-                if (c > 0) {
-                    return
-                }
-
-                alert(error.errorMessage);
-                c++;
-            });
-
-            //
-            // for(let i = 0; i < arr.length; i++) {
-            //     alert(arr[i]);
-            // }
+                alert(arr[i]);
+            }
         }
     })
 }
