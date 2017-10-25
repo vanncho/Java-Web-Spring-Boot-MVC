@@ -52,18 +52,26 @@ public class HomeController {
 
         List<BusListModel> buses = this.busService.getAllBuses();
         List<CityViewModel> cities = this.cityService.getAllCities();
+        List<BusSearchModel> searched = null;
+        
+        if (null != origin && null != destination && null != dateOfJourney) {
+        	
+        	if (!origin.equals("") && !destination.equals("") && !dateOfJourney.equals("")) {
 
-        List<BusSearchModel> searched = this.busService.findByOriginAndDestination(origin, destination, dateOfJourney);
+            	searched = this.busService.findByOriginAndDestination(origin, destination, dateOfJourney);
+            	
+            	if (searched.size() > 0) {
 
-        if (searched.size() > 0 && dateOfJourney != null) {
+                    model.addAttribute("searchedBuses", searched);
+                    session.setAttribute("chosenDate", dateOfJourney);
+                    
+                } else {
 
-            model.addAttribute("searchedBuses", searched);
-        } else if (origin != null && destination != null && dateOfJourney != null && searched.size() == 0) {
-
-            model.addAttribute("nobus", "No Result Found");
+                    model.addAttribute("nobus", "No Result Found");
+                }
+            }
         }
-
-        session.setAttribute("chosenDate", dateOfJourney);
+        
         model.addAttribute("title", "Online Bus Reservation");
         model.addAttribute("buses", buses);
         model.addAttribute("cities", cities);
