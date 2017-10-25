@@ -87,7 +87,7 @@ body {
     border-radius: 0;
     width: 215px;
     height: 45px;
-    margin-right: 27px;
+    margin-right: 28px;
     font-size: 17px;
 }
 
@@ -96,7 +96,8 @@ body {
     border-radius: 0;
     width: 215px;
     height: 45px;
-    margin-right: 27px;
+    margin-top: 4px;
+    margin-right: 28px;
     font-size: 17px;
     display: inline-block;
 }
@@ -109,6 +110,7 @@ body {
 #btn-show {
     height: 46px;
     border-radius: 0;
+    margin-bottom: 3px;
 }
 
 .form-horizontal.select {
