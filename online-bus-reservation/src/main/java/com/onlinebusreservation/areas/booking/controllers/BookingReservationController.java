@@ -87,6 +87,7 @@ public class BookingReservationController {
             this.previewBooking.setDateOfJourney((String)session.getAttribute("chosenDate"));
         }
 
+        this.previewBooking.setBusId(id);
         BusBookViewModel bus = this.busService.getBookBus(id, this.previewBooking.getDateOfJourney());
 
         model.addAttribute("title", "Bus Booking");
